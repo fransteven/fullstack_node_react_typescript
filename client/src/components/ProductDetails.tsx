@@ -22,7 +22,7 @@ export default function ProductDetails({product}:ProductDetailsProps) {
                 {isAvailable ? 'Disponible':'No Disponible'}
             </td>
             <td className="p-3 text-lg text-gray-800 ">
-                <div className="flex gap-10 items-center justify-between">
+                <div className="flex justify-between gap-3">
                     <button
                         onClick={
                             /*navigate recibe dos parámetros y el segundo es opcional
@@ -36,10 +36,10 @@ export default function ProductDetails({product}:ProductDetailsProps) {
                                 //     state:product
                                 // }
                             )}
-                        className="bg-indigo-600 text-white rounded-lg w-full p-2 uppercase font-bold text-xs text-center"
+                        className="bg-indigo-600 text-white rounded-lg w-1/2 p-1 uppercase font-bold text-xs text-center"
                     >Editar</button>
                     <button
-                        className="bg-red-600 text-white rounded-lg w-full p-2 uppercase font-bold text-xs text-center"
+                        className="bg-red-600 text-white rounded-lg w-1/2 p-1 uppercase font-bold text-xs text-center"
                     >Eliminar</button>
                 </div>
             </td>

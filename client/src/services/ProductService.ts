@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { DraftProductSchema, Product, ProductSchema, ProductsSchema } from '../types'
-import { safeParse } from 'valibot'
+import { safeParse,coerce, number,parse, pipe, string, transform } from 'valibot'
+import { toBoolean } from '../utils';
 type ProductData = {
     [k: string]: FormDataEntryValue;
 }
@@ -61,5 +62,29 @@ export async function getProdutcById(id:Product['id']) {
     } catch (error) {
         console.log(error);
         
+    }
+}
+
+export async function updateProduct(data:ProductData,id:Product['id']){
+
+    const  NumberSchema = pipe(string(),transform(Number),number())
+
+    try {
+        const result = safeParse(ProductSchema,{
+            id,
+            name: data.name,
+            price: parse(NumberSchema,data.price),
+            availability: toBoolean(data.availability.toString())
+        })
+        if(result.success){
+            const url = `${import.meta.env.VITE_API_URL}/api/products/${id}`
+            await axios.put(url,result.output)
+            
+        }else{
+            throw new Error('Datos no válidos')
+        }
+        
+    } catch (error) {
+        console.log(error)
     }
 }
